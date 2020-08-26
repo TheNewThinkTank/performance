@@ -1,6 +1,6 @@
 # local-pyspark
 Comparing performance of pyspark and plain function
 
-![image](data.png)
+![image](img/data.png)
 
-![image](ratio.png)
+![image](img/ratio.png)
