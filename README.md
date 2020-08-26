@@ -2,3 +2,5 @@
 Comparing performance of pyspark and plain function
 
 ![image](data.png)
+
+![image](ratio.png)
