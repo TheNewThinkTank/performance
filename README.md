@@ -6,4 +6,12 @@
 
 ![image](img/ratio.png)
 
-### Coming up: CPU and Memory profiling
+### CPU and Memory profiling
+
+Line-profiling, CPU and memory optimization
+
+### Generation of linting reports with Pylint and Prospector
+
+Using either BASH or Powershell script,
+generate linting reports for your Python files
+using your linter of choice.
