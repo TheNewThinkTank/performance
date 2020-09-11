@@ -4,6 +4,9 @@ $folders = @("C:\Users\$env:UserName\Desktop\my_project_folder\linter_reports",
              "C:\Git_Repositories\my_repo"
 )
 
+$debug = $false
+$showPythonFiles = $true
+$createReports = $true
 
 function debug_linting() {
     # One hardcoded module
@@ -42,8 +45,14 @@ function create_reports($path_to_files) {
   }
 
 
-# debug_linting
+if ($debug) {
+    debug_linting
+}
 
-# show_python_files -path_to_files $folders[0]
+if ($showPythonFiles) {
+    show_python_files -path_to_files $folders[0]
+}
 
-create_reports -path_to_files $folders[0]
+if ($createReports) {
+    create_reports -path_to_files $folders[0]
+}
