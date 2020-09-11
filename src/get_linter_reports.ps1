@@ -8,6 +8,7 @@ $debug = $false
 $showPythonFiles = $true
 $createReports = $true
 
+
 function debug_linting() {
     # One hardcoded module
     pylint read_parquet.py | Out-File -FilePath .\results_of_all_modules.txt
