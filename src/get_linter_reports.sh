@@ -5,9 +5,16 @@ Usage: bash get_linter_reports.sh make
 Or: bash get_linter_reports.sh delete
 '
 
-PYTHON_FILES=`find . -type f -name "*.py"`
+SOURCE='Python'
+TARGET='Linter_Reports'
+
+PYTHON_FILES=`find $SOURCE -type f -name "*.py"`
+
 LINTERS=("pylint" "prospector")
 current_time=$(date "+%Y.%m.%d-%H.%M")
+
+# If target does not exist, create it
+mkdir -p $TARGET
 
 
 function make_reports {
@@ -16,19 +23,22 @@ function make_reports {
         for LINTER in "${LINTERS[@]}"
         do
             echo $LINTER$"_results_"$(basename ${PYTHON_FILE%???})$"_$current_time.txt"
-            $LINTER $PYTHON_FILE >> $LINTER$"_results_"$(basename ${PYTHON_FILE%???})$"_$current_time.txt"
+            
+            $LINTER $PYTHON_FILE \
+            >> $TARGET/$LINTER$"_results_"$(basename ${PYTHON_FILE%???})$"_$current_time.txt"
+        
         done
     done
 }
 
 
 function delete_reports {
-    LINTER_FILES=`find . -type f -name "*.txt"`
+    LINTER_FILES=`find $TARGET -type f -name "*.txt"`
     for LINTER_FILE in $LINTER_FILES
     do
         for LINTER in ${LINTERS[@]}
         do
-            if [[ $LINTER_FILE == $"./"$LINTER$"_results_"* ]]
+            if [[ $LINTER_FILE == $TARGET/$LINTER$"_results_"* ]]
             then
                 echo "Deleting $LINTER_FILE"
                 rm $LINTER_FILE
