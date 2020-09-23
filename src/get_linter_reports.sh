@@ -11,10 +11,9 @@ function usage {
     Usage: bash get_linter_reports.sh -m make -s source_folder -t target_folder
     Or: bash get_linter_reports.sh -m delete -s source_folder -t target_folder
     '
-    exit 1
 }
 
-# usage
+usage
 
 # Create CLI flags
 while getopts m:s:t: flag
