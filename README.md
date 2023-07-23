@@ -1,3 +1,4 @@
+[![GitHub repo size](https://img.shields.io/github/repo-size/TheNewThinkTank/performance?style=flat&logo=github&logoColor=whitesmoke&label=Repo%20Size)](https://github.com/TheNewThinkTank/performance/archive/refs/heads/main.zip)
 # performance
 
 ### Comparing performance of pyspark and plain function
