@@ -44,3 +44,6 @@ jobs:
 
       - name: Lint with ruff
         run: poetry run ruff .
+
+      - name: sort all imports with isort
+        run: poetry run isort .
