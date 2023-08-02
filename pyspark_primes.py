@@ -1,21 +1,26 @@
 """
 Learnings:
-Need over approx. 10_000_000 (or smaller) numbers before pyspark is faster than just running locally.
+Need over approx. 10_000_000 (or smaller) numbers,
+before pyspark is faster than just running locally.
 """
-import pyspark
-import time
-import matplotlib.pyplot as plt
-from tqdm import tqdm
-from os import path
-import pandas as pd
 
-if not 'sc' in globals():
+import time
+from os import path
+from typing import Iterable
+
+import matplotlib.pyplot as plt
+import pandas as pd
+import pyspark
+from tqdm import tqdm
+
+if 'sc' not in globals():
     sc = pyspark.SparkContext()
 
 
-def is_it_prime(number):
+def is_it_prime(number: int) -> bool:
     """Check if a number is prime."""
-    number = abs(int(number))  # make sure n is a positive integer
+
+    number = abs(number)  # make sure n is a positive integer
     # simple tests
     if number < 2:
         return False
@@ -31,8 +36,9 @@ def is_it_prime(number):
     return True
 
 
-def generate_data(n):
+def generate_data(n: Iterable) -> None:
     """Save execution time of local and pyspark runs to a CSV file."""
+
     data = []
 
     for numbers in tqdm(n):
@@ -53,13 +59,13 @@ def generate_data(n):
     df.to_csv('data.csv')
 
 
-def main():
+def main() -> None:
     """Driver function."""
 
     print("Number of pyspark cores", sc.defaultParallelism)  # 4
 
     if not path.exists('data.csv'):
-        data = generate_data(range(1, 500_000, 1_000))
+        generate_data(range(1, 500_000, 1_000))
 
     df = pd.read_csv('data.csv')
     df = df.iloc[1:]  # Remove 1st line
@@ -67,7 +73,10 @@ def main():
     print(df.head())
 
     df.plot(x='n', y='ratio_local_pyspark', kind='line', color='g')
-    # df.plot(x='n', y='ratio_local_pyspark', logx=True, kind='line', color='g')  # if steps are unevenly spaced
+
+    # if steps are unevenly spaced:
+    # df.plot(x='n', y='ratio_local_pyspark', logx=True, kind='line', color='g')
+
     plt.hlines(y=1, xmin=1, xmax=500_000, colors='k', linestyles='solid')
     plt.savefig('ratio.png')  # 'data.png'
     plt.show()
