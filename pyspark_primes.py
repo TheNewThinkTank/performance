@@ -17,6 +17,7 @@ if 'sc' not in globals():
     sc = pyspark.SparkContext()
 
 
+# TODO: use algo-lib prime function here instead
 def is_it_prime(number: int) -> bool:
     """Check if a number is prime."""
 
